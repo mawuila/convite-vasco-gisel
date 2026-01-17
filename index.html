@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convite de Noivado | Vasco & Gisela</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Cinzel:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --gold:#c9a24d;           /* dourado claro */
+      --gold-deep:#9f7a2a;      /* dourado fechado */
+      --nude:#f3e6dd;           /* rosa nude */
+      --paper:#fbfaf7;
+      --ink:#3b3b3b;
+      --envelope:#b9964a;
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background: radial-gradient(circle at top, #ffffff 0%, #f4efe9 60%, #e8e1d8 100%);
+      font-family:'Playfair Display', serif;
+      color:var(--ink);
+    }
+
+    /* ---------- ENVELOPE ---------- */
+    .envelope-wrapper{ perspective:1400px; }
+
+    .envelope{
+      width:360px; height:230px;
+      background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+      position:relative;
+      border-radius:8px;
+      box-shadow:0 25px 45px rgba(0,0,0,.35);
+      cursor:pointer;
+    }
+
+    .flap{
+      position:absolute; top:0; left:0; width:100%; height:100%;
+      background:linear-gradient(180deg,#e6c97a,#9f7a2a);
+      clip-path:polygon(0 0,50% 58%,100% 0);
+      transform-origin:top;
+      transition:transform 1.2s ease;
+      z-index:3;
+    }
+
+    .open .flap{ transform:rotateX(180deg); }
+
+    .seal{
+      position:absolute; bottom:55px; left:50%; transform:translateX(-50%);
+      width:86px; height:86px;
+      background:radial-gradient(circle at 30% 30%,#ffe7b0,#9f7a2a);
+      border-radius:50%;
+      box-shadow:0 8px 22px rgba(0,0,0,.45);
+      display:flex; align-items:center; justify-content:center;
+      font-family:'Cinzel', serif; font-size:26px; color:#5a3d12;
+      z-index:4;
+    }
+
+    .hint{
+      position:absolute; bottom:18px; width:100%; text-align:center;
+      font-size:12px; letter-spacing:1px; color:#fff;
+      font-family:'Cinzel', serif;
+    }
+
+    /* ---------- CONVITE ---------- */
+    .invite{
+      display:none;
+      max-width:440px;
+      background:linear-gradient(180deg,var(--paper),var(--nude));
+      padding:48px 34px;
+      border-radius:22px;
+      text-align:center;
+      box-shadow:0 30px 60px rgba(0,0,0,.35);
+      animation:fadeUp 1.4s ease;
+      position:relative;
+    }
+
+    /* ornamentos dourados */
+    .ornament{
+      position:absolute; width:90px; height:90px; opacity:.35;
+      background:radial-gradient(circle,var(--gold),transparent 70%);
+    }
+
+    .tl{ top:10px; left:10px }
+    .tr{ top:10px; right:10px }
+    .bl{ bottom:10px; left:10px }
+    .br{ bottom:10px; right:10px }
+
+    @keyframes fadeUp{
+      from{opacity:0; transform:translateY(40px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    .monogram{
+      font-family:'Cinzel', serif; font-size:36px; color:var(--gold-deep);
+    }
+
+    .title{
+      font-family:'Cinzel', serif; letter-spacing:3px; font-size:14px;
+      margin-bottom:20px;
+    }
+
+    .verse{
+      font-size:14px; font-style:italic; margin:18px 0; color:#5a4a2e;
+    }
+
+    .names{
+      font-family:'Great Vibes', cursive; font-size:44px; color:var(--gold-deep);
+      margin:22px 0;
+    }
+
+    .divider{
+      width:120px; height:1px; background:var(--gold);
+      margin:18px auto;
+    }
+
+    .text{ font-size:15px; line-height:1.7; margin:14px 0 }
+
+    iframe{
+      width:100%; height:220px; border:0; border-radius:14px; margin-top:18px;
+    }
+
+    .btn{
+      display:inline-block; margin-top:22px;
+      padding:12px 30px; border-radius:30px;
+      background:linear-gradient(135deg,var(--gold),var(--gold-deep));
+      color:#fff; text-decoration:none; font-size:13px; letter-spacing:1px;
+    }
+
+    .qr{ margin-top:22px }
+    .qr img{ width:120px }
+
+    audio{display:none}
+  </style>
+</head>
+<body>
+
+<audio id="music" loop>
+  <source src="https://cdn.pixabay.com/audio/2023/03/28/audio_6f7b1f5c85.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ENVELOPE -->
+<div class="envelope-wrapper" id="envWrap">
+  <div class="envelope" onclick="openInvite()">
+    <div class="flap"></div>
+    <div class="seal">V&amp;G</div>
+    <div class="hint">TOQUE PARA ABRIR</div>
+  </div>
+</div>
+
+<!-- CONVITE NOIVADO -->
+<div class="invite" id="invite">
+  <div class="ornament tl"></div>
+  <div class="ornament tr"></div>
+  <div class="ornament bl"></div>
+  <div class="ornament br"></div>
+
+  <div class="monogram">V &amp; G</div>
+  <div class="title">CONVITE DE NOIVADO</div>
+
+  <div class="verse">
+    “O amor é paciente, é bondoso. O amor tudo sofre, tudo crê, tudo espera, tudo suporta.”<br>
+    <small>1 Coríntios 13:4–7</small>
+  </div>
+
+  <div class="text">
+    O Senhor escreveu a nossa história com amor,<br>
+    agora celebramos o início do nosso para sempre.
+  </div>
+
+  <div class="names">Vasco &amp; Gisela</div>
+
+  <div class="divider"></div>
+
+  <div class="text"><strong>Sábado • 21 de Março de 2026</strong></div>
+
+  <div class="text">
+    15:00 – Conversa Familiar<br>
+    17:00 – Copo D'Água
+  </div>
+
+  <div class="text">
+    Praia do Bispo – Grupo Desportivo<br>
+    Depois do Colégio África Amiga
+  </div>
+
+  <iframe src="https://www.google.com/maps?q=Praia%20do%20Bispo%20Grupo%20Desportivo&output=embed"></iframe>
+
+  <a class="btn" href="https://wa.me/939718531?text=Confirmo%20minha%20presença%20no%20noivado%20de%20Vasco%20e%20Gisela" target="_blank">CONFIRMAR PRESENÇA</a>
+
+  <div class="qr">
+    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://seuconvite.com" alt="QR Code">
+  </div>
+</div>
+
+<script>
+function openInvite(){
+  document.getElementById('envWrap').querySelector('.envelope').classList.add('open');
+  document.getElementById('music').play();
+  setTimeout(()=>{
+    document.getElementById('envWrap').style.display='none';
+    document.getElementById('invite').style.display='block';
+  },1200);
+}
+</script>
+
+</body>
+</html>
